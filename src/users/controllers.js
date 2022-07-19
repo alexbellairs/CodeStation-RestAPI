@@ -39,8 +39,39 @@ exports.deleteOne = async (req, res) => {
 
 exports.listUser = async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.params.username });
+    const user = await User.findOne({ username:req.params.username });
     res.send({user});
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
+
+exports.update = async (req, res) => {
+  try {
+    const userUpdates = await User.updateOne(
+      req.body.userObj,
+      req.body.updateObj
+    );
+    if (result.modifiedCount > 0) {
+      res.status(200).send({ msg: "Successful Update" });
+    } else {
+      throw new Error({ msg: "Something went wrong" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
+
+exports.findAll = async (req, res) => {
+  try {
+    const users = await User.find(req.params);
+    if (!users) {
+      throw new Error("No users found");
+    } else {
+      res.send({ users });
+    } 
   } catch (error) {
     console.log(error);
     res.send({ error });
