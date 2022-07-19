@@ -1,3 +1,4 @@
+
 const { Router } = require("express"); //import Router method only from express
 const {
   signUp,
@@ -17,3 +18,4 @@ userRouter.get("/findAll", findAll); //defining a get request on /users path, th
 userRouter.patch("/users", hashPass, update); //defining a put request on /user path, that calls the update controller
 userRouter.delete("/user/:username", tokenCheck, deleteOne); //defining a delete request on /user/:username path, that calls the delUser controller
 module.exports = userRouter;
+
