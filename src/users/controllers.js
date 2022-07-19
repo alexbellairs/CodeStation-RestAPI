@@ -53,7 +53,7 @@ exports.update = async (req, res) => {
       req.body.userObj,
       req.body.updateObj
     );
-    if (result.modifiedCount > 0) {
+    if (userUpdates.modifiedCount > 0) {
       res.status(200).send({ msg: "Successful Update" });
     } else {
       throw new Error({ msg: "Something went wrong" });
