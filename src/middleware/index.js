@@ -1,7 +1,5 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../users/model");
 
+<<<<<<< HEAD
 exports.hashPass = async (req, res, next) => {
   try {
     if (req.body.password) {
@@ -46,3 +44,5 @@ exports.tokenCheck = async (req, res, next) => {
     res.send({ error });
   }
 };
+=======
+>>>>>>> 6322b95ca6f22c5849b80fd36dfe3bb768569bb9

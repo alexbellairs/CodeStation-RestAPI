@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const jwt = require("jsonwebtoken");
 const User = require("./model");
 // Signs up a user.
@@ -77,4 +78,6 @@ exports.findAll = async (req, res) => {
     res.send({ error });
   }
 };
+=======
+>>>>>>> 6322b95ca6f22c5849b80fd36dfe3bb768569bb9
 

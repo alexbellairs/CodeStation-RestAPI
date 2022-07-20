@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require("./db/connection"); // instantly run database connection.
 const express = require("express"); // pull in all express modules
 const userRouter = require("./users/routes"); // bring in all endpoints connected to userRouter.
@@ -11,3 +12,6 @@ app.use(userRouter);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 }); // listening on port 5001 or provided port on current location (localhost).
+=======
+
+>>>>>>> 6322b95ca6f22c5849b80fd36dfe3bb768569bb9
