@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("./model");
-
+// Signs up a user.
 exports.signUp = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
@@ -11,7 +11,7 @@ exports.signUp = async (req, res) => {
   res.send({ error });
   }
 };
-
+// Logs a user in
 exports.login = async (req, res) => {
   try {
     console.log("login" + req.user);
@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
     res.send({ error });
   }
 };
-
+// Deletes one user from the database.
 exports.deleteOne = async (req, res) => {
   try {
     const user = await User.findOneAndDelete({ username:req.params.username });
@@ -36,7 +36,7 @@ exports.deleteOne = async (req, res) => {
     res.send({ error });
   }
 };
-
+// Find a user.
 exports.listUser = async (req, res) => {
   try {
     const user = await User.findOne({ username:req.params.username });
@@ -46,7 +46,7 @@ exports.listUser = async (req, res) => {
     res.send({ error });
   }
 };
-
+// Updates one user in the database.
 exports.update = async (req, res) => {
   try {
     const userUpdates = await User.updateOne(
@@ -63,7 +63,7 @@ exports.update = async (req, res) => {
     res.send({ error });
   }
 };
-
+// Finds all users in the database.
 exports.findAll = async (req, res) => {
   try {
     const users = await User.find(req.params);
