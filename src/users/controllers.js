@@ -5,10 +5,10 @@ exports.signUp = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
     const token = jwt.sign({ id: newUser._id }, process.env.SECRET);
-  res.send({ user: newUser, token });
+    res.send({ user: newUser, token });
   } catch (error) {
-  console.log(error);
-  res.send({ error });
+    console.log(error);
+    res.send({ error });
   }
 };
 // Logs a user in
@@ -29,8 +29,9 @@ exports.login = async (req, res) => {
 // Deletes one user from the database.
 exports.deleteOne = async (req, res) => {
   try {
-    const user = await User.findOneAndDelete({ username:req.params.username });
-    res.send({user});
+    const user = await User.findOneAndDelete({ username: req.params.username });
+    res.send({ user });
+    console.log("Succesfully Deleted");
   } catch (error) {
     console.log(error);
     res.send({ error });
@@ -39,8 +40,8 @@ exports.deleteOne = async (req, res) => {
 // Find a user.
 exports.listUser = async (req, res) => {
   try {
-    const user = await User.findOne({ username:req.params.username });
-    res.send({user});
+    const user = await User.findOne({ username: req.params.username });
+    res.send({ user });
   } catch (error) {
     console.log(error);
     res.send({ error });
@@ -71,7 +72,7 @@ exports.findAll = async (req, res) => {
       throw new Error("No users found");
     } else {
       res.send({ users });
-    } 
+    }
   } catch (error) {
     console.log(error);
     res.send({ error });
