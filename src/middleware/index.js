@@ -38,7 +38,7 @@ exports.tokenCheck = async (req, res, next) => {
     const decodedToken = jwt.verify(
       req.header("Authorization"),
       process.env.SECRET
-    ); //decode token using same secret that created the token.
+    ); // Decode token using same secret that created the token.
     req.user = await User.findById(decodedToken.id); //finding the user by their id, stored in the token.
     next();
   } catch (error) {
