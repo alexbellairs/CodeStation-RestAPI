@@ -29,9 +29,12 @@ exports.login = async (req, res) => {
 // Deletes one user from the database.
 exports.deleteOne = async (req, res) => {
   try {
-    const user = await User.findOneAndDelete({ username: req.params.username });
-    res.send({ user });
-    console.log("Succesfully Deleted");
+    const result = await User.deleteOne({ _id: req.user._id });
+    if (result.deletedCount > 0) {
+      res.send({ msg: "Successfully Deleted" });
+    } else {
+      throw new Error({ msg: "Something went wrong" });
+    }
   } catch (error) {
     console.log(error);
     res.send({ error });
@@ -73,6 +76,16 @@ exports.findAll = async (req, res) => {
     } else {
       res.send({ users });
     }
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
+
+exports.removeUser = async (req, res) => {
+  try {
+    const removeUser = await User.deleteOne({ username: req.params.username });
+    res.send({ user: removeUser });
   } catch (error) {
     console.log(error);
     res.send({ error });
