@@ -27,19 +27,53 @@ exports.login = async (req, res) => {
   }
 };
 // Deletes one user from the database.
-exports.deleteOne = async (req, res) => {
+
+exports.deleteUser = async (req, res) => {
   try {
-    const result = await User.deleteOne({ _id: req.user._id });
-    if (result.deletedCount > 0) {
-      res.send({ msg: "Successfully Deleted" });
-    } else {
-      throw new Error({ msg: "Something went wrong" });
-    }
+    const delUser = await User.deleteOne({
+      username: req.params.username,
+    });
+    const secret = process.env.SECRET;
+    const token = jwt.verify(secret, {
+      username: req.username,
+    });
+    res.send({ user: delUser }, token);
   } catch (error) {
     console.log(error);
     res.send({ error });
   }
 };
+
+// exports.deleteUser = async (req, res) => {
+//   try {
+//     const user = await User.deleteOne({
+//       _id: req.user._id,
+//     });
+//     if (user.deletedCount > 0) {
+//       res.send({ msg: "Deleted user" });
+//     } else {
+//       throw new Error("Error in request");
+//     }
+//   } catch (error) {
+//     console.log(error);
+
+//     res.send({ msg: "Error deleting user", error });
+//   }
+// };
+
+// exports.deleteOne = async (req, res) => {
+//   try {
+//     const result = await User.deleteOne({ _id: req.user._id });
+//     if (result.deletedCount > 0) {
+//       res.send({ msg: "Successfully Deleted" });
+//     } else {
+//       throw new Error({ msg: "Something went wrong" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.send({ error });
+//   }
+// };
 // Find a user.
 exports.listUser = async (req, res) => {
   try {
@@ -50,23 +84,43 @@ exports.listUser = async (req, res) => {
     res.send({ error });
   }
 };
-// Updates one user in the database.
-exports.update = async (req, res) => {
+
+// Updates password for user in the database.
+
+exports.updatePassword = async (req, res) => {
   try {
-    const userUpdates = await User.updateOne(
-      req.body.userObj,
-      req.body.updateObj
+    const updatePassword = await User.updateOne(
+      { username: req.body.username },
+      { $set: { password: req.body.password } }
     );
-    if (userUpdates.modifiedCount > 0) {
-      res.status(200).send({ msg: "Successful Update" });
-    } else {
-      throw new Error({ msg: "Something went wrong" });
-    }
+    res.send({
+      updatePassword,
+      message: `Password update for ${req.body.username}`,
+    });
   } catch (error) {
     console.log(error);
-    res.send({ error });
+    res.send({ error, message: "Password update failure" });
   }
 };
+
+// Alex B - update function
+// exports.update = async (req, res) => {
+//   try {
+//     const userUpdates = await User.updateOne(
+//       { email: req.body.email },
+//       { password: req.params.password },
+//       { $set: { password: req.body.password } }
+//     );
+//     if (userUpdates.modifiedCount > 0) {
+//       res.status(200).send({ msg: "Successful Update" });
+//     } else {
+//       throw new Error({ msg: "Something went wrong" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.send({ error });
+//   }
+// };
 // Finds all users in the database.
 exports.findAll = async (req, res) => {
   try {
