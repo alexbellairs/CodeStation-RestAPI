@@ -14,12 +14,13 @@ exports.signUp = async (req, res) => {
 // Logs a user in
 exports.login = async (req, res) => {
   try {
+    const token = jwt.sign({ id: req.user._id }, process.env.SECRET);
     console.log("login" + req.user);
     if (!req.user) {
       throw new Error("Wrong Details");
     } else {
       console.log("Successful Login");
-      res.send({ user: req.user });
+      res.send({ user: req.user, token });
     }
   } catch (error) {
     console.log(error);
