@@ -18,7 +18,7 @@ userRouter.get("/user/:username", listUser); //defining a get request on /user:u
 userRouter.get("/findAll", findAll); //defining a get request on /users path, that calls the findAll controller.
 userRouter.patch("/users", hashPass, update); //defining a put request on /user path, that calls the update controller.
 // userRouter.delete("/user", tokenCheck, deleteOne); //defining a delete request on /user/:username path, that calls the delUser controller.
-// userRouter.delete("/user/:username", removeUser);
+userRouter.delete("/user/:username", removeUser);
 userRouter.delete("/user", tokenCheck, deleteOne); //defining a delete request on /user/:username path, that calls the delUser controller.
 
 module.exports = userRouter;
