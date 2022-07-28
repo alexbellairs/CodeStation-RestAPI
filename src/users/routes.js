@@ -8,7 +8,7 @@ const {
   deleteOne,
   removeUser,
 } = require("./controllers"); //import only signUp from controllers file.
-const { hashPass, comparePass, tokenCheck } = require("../middleware");
+const { hashPass, comparePass, tokenCheck } = require("../middleware"); // import hashPass, comparePass and tokenCheck from middleware file.
 const userRouter = Router(); //create a router that can have endpoints added to it.
 
 userRouter.post("/users", hashPass, signUp); //defining a post request on /user path, that calls the signUp controller.
@@ -22,6 +22,8 @@ userRouter.patch("/users", hashPass, update); //defining a put request on /user 
 // userRouter.delete("/user/:username", removeUser);
 
 userRouter.delete("/user", tokenCheck, deleteOne); //defining a delete request on /user/:username path, that calls the delUser controller.
-userRouter.delete("/user/:username", removeUser);
+userRouter.delete("/user/:username", removeUser); // defining a delete request on /user/:username path, that calls the delUser controller.
 
 module.exports = userRouter;
+
+// If this code works, it was written by Gareth Hough. If not, I don't know who wrote it...

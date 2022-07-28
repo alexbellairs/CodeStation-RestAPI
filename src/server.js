@@ -7,7 +7,7 @@ const port = process.env.PORT || 5001; // store supplied port or port 5001.
 
 app.use(express.json()); // use express json parser.
 app.use(cors()); // allows requests to be made from other Node applications of any origin.
-app.use(userRouter);
+app.use(userRouter); // use userRouter to add endpoints to the webserver.
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 }); // listening on port 5001 or provided port on current location (localhost).

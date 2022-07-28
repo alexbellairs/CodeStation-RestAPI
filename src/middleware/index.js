@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../users/model");
 
+// hashes the password before it is saved to the database using bcrypt.
 exports.hashPass = async (req, res, next) => {
   try {
     if (req.body.password) {
@@ -19,6 +20,7 @@ exports.hashPass = async (req, res, next) => {
   }
 };
 
+// uses bcrypt to compare the password to the hashed password in the database.
 exports.comparePass = async (req, res, next) => {
   try {
     req.user = await User.findOne({ username: req.body.username });
@@ -33,13 +35,14 @@ exports.comparePass = async (req, res, next) => {
   }
 };
 
+// checks the token to see if it is valid.
 exports.tokenCheck = async (req, res, next) => {
   try {
     const decodedToken = jwt.verify(
       req.header("Authorization"),
       process.env.SECRET
-    ); // Decode token using same secret that created the token.
-    req.user = await User.findById(decodedToken.id); //finding the user by their id, stored in the token.
+    ); // decodes token using same secret that created the token.
+    req.user = await User.findById(decodedToken.id); // find user by id in decoded token.
     next();
   } catch (error) {
     console.log(error);
