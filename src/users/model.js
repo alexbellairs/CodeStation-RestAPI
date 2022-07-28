@@ -23,4 +23,4 @@ const User = mongoose.model("User", userSchema);
 
 module.exports = User;
 
-// Pieced together by Gareth Hough
+// pieced together by Gareth Hough
