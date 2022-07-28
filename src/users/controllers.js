@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const User = require("./model");
-// Signs up a user.
+
+
+// Signs up a user
 exports.signUp = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
@@ -11,7 +13,9 @@ exports.signUp = async (req, res) => {
     res.send({ error });
   }
 };
-// Logs a user in
+
+// logs in a user
+
 exports.login = async (req, res) => {
   try {
     const token = jwt.sign({ id: req.user._id }, process.env.SECRET);
@@ -27,7 +31,8 @@ exports.login = async (req, res) => {
     res.send({ error });
   }
 };
-// Deletes one user from the database.
+
+// used on the front end to delete one user from the database
 exports.deleteOne = async (req, res) => {
   try {
     const result = await User.deleteOne({ _id: req.user._id });
@@ -41,7 +46,8 @@ exports.deleteOne = async (req, res) => {
     res.send({ error });
   }
 };
-// Find a user.
+
+// find a user
 exports.listUser = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
@@ -51,7 +57,8 @@ exports.listUser = async (req, res) => {
     res.send({ error });
   }
 };
-// Updates one user in the database.
+
+// updates one user in the database
 exports.update = async (req, res) => {
   try {
     const userUpdates = await User.updateOne(
@@ -68,7 +75,8 @@ exports.update = async (req, res) => {
     res.send({ error });
   }
 };
-// Finds all users in the database.
+
+// finds all users in the database
 exports.findAll = async (req, res) => {
   try {
     const users = await User.find(req.params);
@@ -83,6 +91,7 @@ exports.findAll = async (req, res) => {
   }
 };
 
+// used in the backend to remove a user
 exports.removeUser = async (req, res) => {
   try {
     const removeUser = await User.deleteOne({ username: req.params.username });
