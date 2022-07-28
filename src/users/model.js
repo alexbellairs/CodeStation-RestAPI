@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// model.js represents the structure and constraints of the data stored in the database
+// model.js represents the structure and constraints of the data stored in the database.
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -23,4 +23,4 @@ const User = mongoose.model("User", userSchema);
 
 module.exports = User;
 
-// pieced together by Gareth Hough
+// pieced together by Gareth Hough. 

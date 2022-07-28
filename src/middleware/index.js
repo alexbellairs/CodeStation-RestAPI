@@ -35,14 +35,14 @@ exports.comparePass = async (req, res, next) => {
   }
 };
 
-// checks the token to see if it is valid
+// checks the token to see if it is valid.
 exports.tokenCheck = async (req, res, next) => {
   try {
     const decodedToken = jwt.verify(
       req.header("Authorization"),
       process.env.SECRET
-    ); // decodes token using same secret that created the token
-    req.user = await User.findById(decodedToken.id); // find user by id in decoded token
+    ); // decodes token using same secret that created the token.
+    req.user = await User.findById(decodedToken.id); // find user by id in decoded token.
     next();
   } catch (error) {
     console.log(error);
